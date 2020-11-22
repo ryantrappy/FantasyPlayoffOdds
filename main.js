@@ -5,6 +5,8 @@ function calculate() {
 	var base_url_historial = "https://fantasy.espn.com/apis/v3/games/ffl/leagueHistory/"
 	var leagueId = document.getElementById("leagueId").value;
 	var seasonId = document.getElementById("seasonId").value;
+	var swid = document.getElementById("swid").value;
+	var espnS2 = document.getElementById("espnS2").value;
 
 	var matchup_url = base_url + seasonId + "/segments/0/leagues/" + leagueId + "?view=mMatchup";
 	var league_info = base_url + seasonId + "/segments/0/leagues/" + leagueId + "?view=mSettings";
@@ -17,8 +19,71 @@ function calculate() {
 	//     	console.log(bsdata)
 	//     }
 	// )
+	document.cookie = `espn_s2=${espnS2}; domain=*`;
+	document.cookie = `SWID=${swid}; domain=*`;
 
-	$.when($.getJSON(matchup_url), $.getJSON(league_info), $.getJSON(team_info), $.getJSON(standings), $.getJSON(activity), $.getJSON(player_wl)).done( // get league settings
+
+	if(swid && swid.length > 0 && espnS2 && espnS2.length > 0){
+		$.ajaxSetup({
+			headers : {
+				withCredentials: true,
+				"Access-Control-Allow-Credentials": true,
+				'Access-Control-Expose-Headers': '*',
+				'Access-Control-Allow-Origin': 'fantasy.espn.com'
+			}
+		});
+	}
+
+	$.when(
+		$.ajax({
+			url: matchup_url,
+			xhrFields: {
+				withCredentials: true
+			},
+			crossDomain: true,
+			type: "GET"
+		}),
+		$.ajax({
+			url: league_info,
+			xhrFields: {
+				withCredentials: true
+			},
+			crossDomain: true,
+			type: "GET"
+		}),
+		$.ajax({
+			url: team_info,
+			xhrFields: {
+				withCredentials: true
+			},
+			crossDomain: true,
+			type: "GET"
+		}),
+		$.ajax({
+			url: standings,
+			xhrFields: {
+				withCredentials: true
+			},
+			crossDomain: true,
+			type: "GET"
+		}),
+		$.ajax({
+			url: activity,
+			xhrFields: {
+				withCredentials: true
+			},
+			crossDomain: true,
+			type: "GET"
+		}),
+		$.ajax({
+			url: player_wl,
+			xhrFields: {
+				withCredentials: true
+			},
+			crossDomain: true,
+			type: "GET"
+		}))
+		.done( // get league settings
 	    function (data1, data2, data3, data4, data5, data6) {  // success callback
 
 			console.log(data1)

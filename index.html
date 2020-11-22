@@ -100,7 +100,9 @@
     <body> 
         <div class="title">
             <h2>Fantasy Football Power Rankings and Playoff Odds</h2>
-            <h2><small>by <a href="https://github.com/rodger-yuan">rodger yuan</a> </small></h2>
+            <h2><small>by <a href="https://github.com/ryantrappy">Ryan Trapp</a> forked from
+                <a href="https://github.com/rodger-yuan">Rodger Yuan</a>
+            </small></h2>
         </div>
         <hr>
         <div class="title">
@@ -121,7 +123,16 @@
                 <label for="leagueId">League ID:</label>
                 <input type="text" name="leagueId" id="leagueId" value="806354">
                 <label for="seasonId">Year:</label>
-                <input type="text" name="seasonId" id="seasonId" value="2019">
+                <input type="text" name="seasonId" id="seasonId" value="2020">
+                <br/>
+                <span>For private leagues enter the following from your cookies.
+                    <br/>
+                    This is done from inspect element -> storage -> cookies.</span>
+                <br>
+                <label for="espnS2">ESPN_S2:</label>
+                <input type="text" name="espnS2" id="espnS2" value="">
+                <label for="swid">SWID:</label>
+                <input type="text" name="swid" id="swid" value="">
             </form>
             <button onclick="calculate()">Calculate</button>
         </div>
